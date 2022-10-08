@@ -6,16 +6,19 @@
     app:startDestination="@id/startFragment">
     <fragment
     android:id="@+id/startFragment"
-    android:name="com.example.xiinder.Fragments.StartFragment"
+    android:name="com.example.xiinder.StartFragment"
     android:label="@string/app_name"
     tools:layout="sdasdasdasdas" >
         <action
             android:id="@+id/action_startFragment_to_settingsFragment"
             app:destination="@id/settingsFragment" />
+        <action
+            android:id="@+id/action_startFragment_to_cardsFragment"
+            app:destination="@id/cardsFragment" />
     </fragment>
     <fragment
         android:id="@+id/profileFragment"
-        android:name="com.example.xiinder.Fragments.ProfileFragment"
+        android:name="com.example.xiinder.ProfileFragment"
         android:label="@string/app_name"
         tools:layout="sdasdasdasdas" >
         <action
@@ -24,7 +27,7 @@
     </fragment>
     <fragment
         android:id="@+id/settingsFragment"
-        android:name="com.example.xiinder.Fragments.SettingsFragment"
+        android:name="com.example.xiinder.SettingsFragment"
         android:label="@string/app_name"
         tools:layout="sdasdasdasdas" >
         <action
@@ -33,7 +36,7 @@
     </fragment>
     <fragment
         android:id="@+id/cardsFragment"
-        android:name="com.example.xiinder.Fragments.CardsFragment"
+        android:name="com.example.xiinder.CardsFragment"
         android:label="@string/app_name"
         tools:layout="sdasdasdasdas" />
 

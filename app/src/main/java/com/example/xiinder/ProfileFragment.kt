@@ -1,4 +1,4 @@
-package com.example.xiinder.Fragments
+package com.example.xiinder
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

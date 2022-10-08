@@ -1,4 +1,4 @@
-package com.example.xiinder.Fragments
+package com.example.xiinder
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -12,9 +12,13 @@ import com.example.xiinder.R
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
-
-class StartFragment : Fragment() {
-
+/**
+ * A simple [Fragment] subclass.
+ * Use the [SettingsFragment.newInstance] factory method to
+ * create an instance of this fragment.
+ */
+class SettingsFragment : Fragment() {
+    // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
 
@@ -31,7 +35,8 @@ class StartFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_start, container, false)
+        return inflater.inflate(R.layout.fragment_settings, container, false)
     }
+
 
 }
