@@ -5,10 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
-import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.xiinder.R
 import com.example.xiinder.databinding.FragmentCardsBinding
@@ -22,10 +19,7 @@ class CardsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val binding = FragmentCardsBinding.inflate(inflater)
-        val divider = DividerItemDecoration(context,DividerItemDecoration.VERTICAL)
-        divider.setDrawable(context?.let { ContextCompat.getDrawable(it,R.drawable.divider_decoration) }!!)
-        binding.photosLinear.addItemDecoration(divider)
-        binding.photosLinear
+
         binding.photosLinear.adapter= this.context?.let { CardsAdapter(it,DataSetForCards().loadCards()) }
         return binding.root
     }
