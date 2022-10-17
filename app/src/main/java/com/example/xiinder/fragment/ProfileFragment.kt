@@ -1,10 +1,10 @@
-package com.example.xiinder
+package com.example.xiinder.fragment
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import com.example.xiinder.R
 
 // TODO: Rename parameter arguments, choose names that match
