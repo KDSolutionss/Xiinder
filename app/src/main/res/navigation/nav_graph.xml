@@ -21,10 +21,13 @@
         android:name="com.example.xiinder.ProfileFragment"
         android:label="@string/app_name"
         tools:layout="sdasdasdasdas" >
+        <argument
+            android:name="profile_id"
+            app:argType="integer" />
+    </fragment>
         <action
             android:id="@+id/action_profileFragment_to_cardsFragment"
             app:destination="@id/cardsFragment" />
-    </fragment>
     <fragment
         android:id="@+id/settingsFragment"
         android:name="com.example.xiinder.SettingsFragment"
@@ -38,6 +41,10 @@
         android:id="@+id/cardsFragment"
         android:name="com.example.xiinder.CardsFragment"
         android:label="@string/app_name"
-        tools:layout="sdasdasdasdas" />
+        tools:layout="sdasdasdasdas" >
+        <action
+            android:id="@+id/action_cardsFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
+    </fragment>
 
 </navigation>
