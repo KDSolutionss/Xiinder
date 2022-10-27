@@ -1,4 +1,4 @@
-package com.example.xiinder
+package com.example.xiinder.fragment
 
 import android.app.Activity
 import android.os.Bundle
@@ -13,6 +13,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.example.xiinder.DataForProfiles
 import com.example.xiinder.R
 import com.example.xiinder.databinding.FragmentProfileBinding
 import com.example.xiinder.network.CardInfo
