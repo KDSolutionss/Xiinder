@@ -3,10 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/startFragment">
+    app:startDestination="@id/authFragment">
     <fragment
         android:id="@+id/startFragment"
-        android:name="com.example.xiinder.StartFragment"
+        android:name="com.example.xiinder.fragment.StartFragment"
         android:label="@string/app_name"
         tools:layout="sdasdasdasdas">
         <action
@@ -18,7 +18,7 @@
     </fragment>
     <fragment
         android:id="@+id/profileFragment"
-        android:name="com.example.xiinder.ProfileFragment"
+        android:name="com.example.xiinder.fragment.ProfileFragment"
         android:label="@string/app_name"
         tools:layout="sdasdasdasdas">
         <action
@@ -27,7 +27,7 @@
     </fragment>
     <fragment
         android:id="@+id/settingsFragment"
-        android:name="com.example.xiinder.SettingsFragment"
+        android:name="com.example.xiinder.fragment.SettingsFragment"
         android:label="@string/app_name"
         tools:layout="sdasdasdasdas">
         <action
@@ -39,5 +39,26 @@
         android:name="com.example.xiinder.CardsFragment"
         android:label="@string/app_name"
         tools:layout="sdasdasdasdas" />
+    <fragment
+        android:id="@+id/authFragment"
+        android:name="com.example.xiinder.fragment.AuthFragment"
+        android:label="fragment_auth"
+        tools:layout="@layout/fragment_auth" >
+        <action
+            android:id="@+id/action_authFragment_to_startFragment"
+            app:destination="@id/startFragment" />
+        <action
+            android:id="@+id/action_authFragment_to_signUpFragment"
+            app:destination="@id/signUpFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/signUpFragment"
+        android:name="com.example.xiinder.fragment.SignUpFragment"
+        android:label="fragment_sign_up"
+        tools:layout="@layout/fragment_sign_up" >
+        <action
+            android:id="@+id/action_signUpFragment_to_authFragment"
+            app:destination="@id/authFragment" />
+    </fragment>
 
 </navigation>
