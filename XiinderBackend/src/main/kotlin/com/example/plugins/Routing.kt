@@ -1,16 +1,28 @@
 package com.example.plugins
 
 import io.ktor.server.routing.*
-import io.ktor.http.*
 import io.ktor.server.application.*
+import io.ktor.server.auth.*
 import io.ktor.server.response.*
-import io.ktor.server.request.*
 
 fun Application.configureRouting() {
-
     routing {
-        get("/") {
-            call.respondText("Hello World!")
+        authorizedRouting()
+        unauthorizedRouting()
+    }
+}
+
+fun Route.authorizedRouting() {
+    authenticate("auth-jwt") {
+        get("/secret") {
+            call.respondText("secret")
         }
     }
 }
+
+fun Route.unauthorizedRouting() {
+    get("/hello-world") {
+        call.respondText("Hello, world!")
+    }
+}
+
