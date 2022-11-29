@@ -1,5 +1,8 @@
+@file:UseSerializers(DateAsLongSerializer::class)
+
 package com.example.plugins
 
+import DateAsLongSerializer
 import com.auth0.jwt.JWT
 import com.auth0.jwt.algorithms.Algorithm
 import com.example.LoginService
@@ -13,13 +16,15 @@ import io.ktor.server.request.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.UseSerializers
 import java.util.*
+
 
 @Serializable
 data class User(val username: String, val password: String)
 
 @Serializable
-data class UserRegister(val username: String, val password: String)
+data class UserRegister(val username: String, val password: String, val name: String, val birthDate: Date)
 
 fun Application.configureSecurity() {
     install(ContentNegotiation) {

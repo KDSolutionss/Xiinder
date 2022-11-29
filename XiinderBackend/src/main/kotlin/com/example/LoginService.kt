@@ -1,27 +1,30 @@
 package com.example
 
-import com.example.dao.UserLoginInfoImpl
-import com.example.dao.UsersDAO
+import com.example.dao.UserLoginInfoDAO
+import com.example.dao.UserDAO
+import com.example.models.User
 import com.example.plugins.UserRegister
+import com.example.repository.UserLoginInfoRepository
+import com.example.repository.UserRepository
 import kotlinx.coroutines.runBlocking
 
 class LoginService {
-    private val loginDao = UserLoginInfoImpl()
-    private val usersDao = UsersDAO()
+    private val loginRepository: UserLoginInfoRepository = UserLoginInfoDAO()
+    private val userRepository : UserRepository = UserDAO()
     fun isValidUserAuth(username: String, password: String): Boolean {
-        val loginInfo = runBlocking {loginDao.getByUsername(username) } ?: return false
+        val loginInfo = runBlocking { loginRepository.getByUsername(username) } ?: return false
         return loginInfo.password == password
     }
 
     fun userExists(username: String): Boolean {
-        val userInfo = runBlocking { loginDao.getByUsername(username) }
+        val userInfo = runBlocking { loginRepository.getByUsername(username) }
         userInfo ?: return false
         return true
     }
 
     fun register(userRegister: UserRegister): Boolean {
-        val user = runBlocking { usersDao.add() } ?: throw Exception()
-        runBlocking { loginDao.add(user.id, userRegister.username, userRegister.password) }
+        val user = runBlocking { userRepository.add( ) } ?: throw Exception() //todo
+        runBlocking { loginRepository.add(user.id, userRegister.username, userRegister.password) }
         return true
     }
 }
