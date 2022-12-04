@@ -17,6 +17,7 @@ import io.ktor.server.response.*
 import io.ktor.server.routing.*
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.UseSerializers
+import java.time.LocalDate
 import java.util.*
 
 
@@ -24,12 +25,9 @@ import java.util.*
 data class User(val username: String, val password: String)
 
 @Serializable
-data class UserRegister(val username: String, val password: String, val name: String, val birthDate: Date)
+data class UserRegister(val username: String, val password: String, val name: String, val birthDate: LocalDate, val telegramId: String)
 
 fun Application.configureSecurity() {
-    install(ContentNegotiation) {
-        json()
-    }
     val secret = environment.config.property("jwt.secret").getString()
     val issuer = environment.config.property("jwt.issuer").getString()
     val audience = environment.config.property("jwt.audience").getString()
