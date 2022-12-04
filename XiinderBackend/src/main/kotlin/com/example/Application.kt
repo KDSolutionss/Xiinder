@@ -13,12 +13,13 @@ fun main(args: Array<String>): Unit = EngineMain.main(args)
 
 @Suppress("unused")
 fun Application.module() {
-    SerializersModule {
-        DateAsLongSerializer
-    }
+
     install(ContentNegotiation)
     {
         json()
+    }
+    SerializersModule {
+        DateAsLongSerializer
     }
     DatabaseFactory.init(environment.config)
     configureSecurity()

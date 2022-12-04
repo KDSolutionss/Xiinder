@@ -1,16 +1,14 @@
 package com.example
 
 import com.example.dao.UserLoginInfoDAO
-import com.example.dao.UserDAO
 import com.example.models.User
 import com.example.plugins.UserRegister
 import com.example.repository.UserLoginInfoRepository
-import com.example.repository.UserRepository
 import kotlinx.coroutines.runBlocking
+import org.jetbrains.exposed.sql.transactions.transaction
 
 class LoginService {
     private val loginRepository: UserLoginInfoRepository = UserLoginInfoDAO()
-    private val userRepository : UserRepository = UserDAO()
     fun isValidUserAuth(username: String, password: String): Boolean {
         val loginInfo = runBlocking { loginRepository.getByUsername(username) } ?: return false
         return loginInfo.password == password
@@ -23,7 +21,13 @@ class LoginService {
     }
 
     fun register(userRegister: UserRegister): Boolean {
-        val user = runBlocking { userRepository.add( ) } ?: throw Exception() //todo
+        val user = transaction {
+            User.new {
+                name = userRegister.name
+                birthDate = userRegister.birthDate
+                telegramId = userRegister.telegramId
+            }
+        }
         runBlocking { loginRepository.add(user.id, userRegister.username, userRegister.password) }
         return true
     }
