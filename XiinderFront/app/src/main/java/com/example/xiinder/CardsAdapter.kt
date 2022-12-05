@@ -14,17 +14,20 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.xiinder.databinding.CardItemBinding
 import com.example.xiinder.network.CardInfo
+import com.example.xiinder.network.ProfileInfo
 
-class CardsAdapter(val context: Context,  private val dataset: List<CardInfo>, val goToProfileFragment: (id: Int) -> Unit):RecyclerView.Adapter<CardsAdapter.ViewHolder>() {
+class CardsAdapter(val context: Context, private val profiles: Map<Int, ProfileInfo>, private val dataset: Map<Int, CardInfo>, val goToProfileFragment: (id: Int) -> Unit,
+                   val goToCardDetailsFragment: (id: Int) -> Unit):RecyclerView.Adapter<CardsAdapter.ViewHolder>() {
     inner class ViewHolder(private var binding: CardItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(cardInfo: CardInfo) {
-            binding.cardLabel.text = cardInfo.description
-            binding.imageView.setImageResource(cardInfo.imageId)
+            binding.Title.text = cardInfo.title
+            binding.image.setImageResource(cardInfo.imageId)
 
-            binding.ProfileButton.setOnClickListener {
-                goToProfileFragment(cardInfo.userId)
-            }
+            binding.userName.text = profiles[cardInfo.userId]?.name ?: "Имя"
+            binding.Title.setOnClickListener{goToCardDetailsFragment(cardInfo.cardId)}
+            binding.linearLayoutForImage.setOnClickListener{goToCardDetailsFragment(cardInfo.cardId)}
+            binding.userName.setOnClickListener{goToProfileFragment(cardInfo.userId)}
             binding.executePendingBindings()
         }
     }
@@ -39,7 +42,9 @@ class CardsAdapter(val context: Context,  private val dataset: List<CardInfo>, v
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = dataset[position]
-        holder.bind(item)
+        if (item != null) {
+            holder.bind(item)
+        }
     }
 
     override fun getItemCount(): Int {

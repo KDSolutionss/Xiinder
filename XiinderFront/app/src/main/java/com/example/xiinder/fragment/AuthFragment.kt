@@ -22,10 +22,10 @@ class AuthFragment : Fragment() {
         val fragmentBinding=FragmentAuthBinding.inflate(inflater,container,false)
         binding=fragmentBinding
         binding!!.authorize.setOnClickListener {
-            if (binding!!.emailText.text?.isNotEmpty()!! &&!binding!!.passwordText.text?.isNotEmpty()!!)
-            {
+            if (binding!!.emailText.text?.isNotEmpty()!! && binding!!.passwordText.text?.isNotEmpty()!!)
+            //{
                 goToMain(binding!!.emailText.text.toString(),binding!!.passwordText.text.toString())
-            }
+            //}
 
         }
         binding!!.signup.setOnClickListener { register() }
