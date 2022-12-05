@@ -33,27 +33,70 @@
                 tools:layout_editor_absoluteY="0dp" />
         </RelativeLayout>
 
-        <TextView
-            android:id="@+id/UserName"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="0.1"
-            android:autoSizeTextType="uniform"
-            android:background="@color/dark_grey"
-            android:gravity="center"
-            android:text="@string/name"
-            android:textAlignment="center"
-            android:textColor="@color/white" />
 
-        <TextView
-            android:id="@+id/UserInfo"
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="0.3"
-            android:autoSizeTextType="uniform"
-            android:gravity="center"
-            android:text="@string/info"
-            android:textColor="@color/white" />
+            android:layout_height="wrap_content"
+            android:id="@+id/cl">
+
+            <TextView
+                android:id="@+id/UserName"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginBottom="1dp"
+                android:layout_weight="0.3"
+                android:autoSizeTextType="uniform"
+                android:gravity="center"
+                android:text="Name"
+
+                android:textColor="@color/white"
+                app:layout_constraintBottom_toTopOf="@+id/UserSurname"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+            <TextView
+                app:layout_constraintTop_toBottomOf="@id/UserName"
+                android:id="@+id/UserSurname"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="0.3"
+                android:autoSizeTextType="uniform"
+                android:gravity="center"
+                android:text="Surname"
+                android:textColor="@color/white" />
+            <TextView
+                app:layout_constraintTop_toBottomOf="@id/UserSurname"
+                android:id="@+id/UserAge"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="0.3"
+                android:autoSizeTextType="uniform"
+                android:gravity="center"
+                android:text="age"
+                android:textColor="@color/white" />
+            <TextView
+                android:id="@+id/UserInterests"
+                app:layout_constraintTop_toBottomOf="@id/UserAge"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="0.3"
+                android:autoSizeTextType="uniform"
+                android:gravity="center"
+                android:text="Interests"
+                android:textColor="@color/white" />
+            <TextView
+                android:id="@+id/UserSocialMedia"
+                app:layout_constraintTop_toBottomOf="@id/UserInterests"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="0.3"
+                android:autoSizeTextType="uniform"
+                android:gravity="center"
+                android:text="social media links"
+                android:textColor="@color/white" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
