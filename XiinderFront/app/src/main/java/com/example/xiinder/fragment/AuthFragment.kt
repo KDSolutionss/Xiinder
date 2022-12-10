@@ -5,15 +5,31 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.activityViewModels
+
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
-import com.example.xiinder.R
+import com.example.xiinder.*
 import com.example.xiinder.databinding.FragmentAuthBinding
+import io.ktor.client.*
+import io.ktor.client.call.*
+import io.ktor.client.engine.cio.*
+import io.ktor.client.plugins.auth.*
+import io.ktor.client.plugins.auth.providers.*
+import io.ktor.client.plugins.contentnegotiation.*
+import io.ktor.client.plugins.websocket.*
+import io.ktor.client.request.*
+import io.ktor.client.utils.EmptyContent.contentType
+import io.ktor.http.*
+import io.ktor.serialization.kotlinx.json.*
+import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.launch
 
 
 class AuthFragment : Fragment() {
     var binding:FragmentAuthBinding?=null
-
-
+    lateinit var dataStore:StoreToken
+    private val viewModel:SharedViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -22,14 +38,14 @@ class AuthFragment : Fragment() {
         val fragmentBinding=FragmentAuthBinding.inflate(inflater,container,false)
         binding=fragmentBinding
         binding!!.authorize.setOnClickListener {
-            if (binding!!.emailText.text?.isNotEmpty()!! && binding!!.passwordText.text?.isNotEmpty()!!)
-            //{
-                goToMain(binding!!.emailText.text.toString(),binding!!.passwordText.text.toString())
-            //}
+            lifecycleScope.launch {goToMain(binding!!.emailText.text.toString(),binding!!.passwordText.text.toString())  }
+
 
         }
         binding!!.signup.setOnClickListener { register() }
-        return fragmentBinding.root
+        dataStore= context?.let { StoreToken(it) }!!
+
+        return   fragmentBinding.root
 
     }
 
@@ -37,15 +53,28 @@ class AuthFragment : Fragment() {
         findNavController().navigate(R.id.action_authFragment_to_signUpFragment)
     }
 
-    private fun goToMain(email:String,password: String) {
+
+    private suspend fun goToMain(email:String, password: String) {
         if (check(email,password))
         {
             findNavController().navigate(R.id.action_authFragment_to_startFragment)
         }
 
     }
-    private fun check(email:String,password:String):Boolean
+
+    private suspend fun check(email:String, password:String):Boolean
     {
+        val user= User(email,password)
+        val message = viewModel.client.post("http://192.168.0.101:8888/login"){ // or your data class
+                contentType(ContentType.Application.Json)
+                setBody(user)
+            }
+        val token= message.body<Map<String,String>>()["token"]?.let { Token(it) }
+        viewModel.configAuthClient(token!!)
+        val check=viewModel.clientCheck(token)
+        coroutineScope { dataStore.saveToken(token.tokenData) }
+        viewModel.setTokenStorage(storeToken = dataStore)
+
         return true
     }
 }

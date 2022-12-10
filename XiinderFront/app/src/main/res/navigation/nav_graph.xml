@@ -45,9 +45,6 @@
         <action
             android:id="@+id/action_cardsFragment_to_profileFragment"
             app:destination="@id/profileFragment" />
-        <action
-            android:id="@+id/action_cardsFragment_to_cardDetailsFragment"
-            app:destination="@id/cardDetailsFragment" />
     </fragment>
     <fragment
         android:id="@+id/authFragment"
@@ -71,12 +68,13 @@
             app:destination="@id/authFragment" />
     </fragment>
     <fragment
-        android:id="@+id/cardDetailsFragment"
-        android:name="com.example.xiinder.fragment.CardDetailsFragment"
-        android:label="fragment_card_details"
-        tools:layout="@layout/fragment_card_details" >
-        <argument android:name="cardId"
-            app:argType="integer" />
+        android:id="@+id/profileDetailsFragment"
+        android:name="com.example.xiinder.fragment.ProfileDetailsFragment"
+        android:label="fragment_profile_details"
+        tools:layout="@layout/fragment_profile_details" >
+        <action
+            android:id="@+id/action_profileDetailsFragment_to_cardsFragment"
+            app:destination="@id/cardsFragment" />
     </fragment>
 
 </navigation>

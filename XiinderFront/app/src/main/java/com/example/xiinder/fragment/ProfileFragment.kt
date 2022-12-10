@@ -14,14 +14,7 @@ import com.example.xiinder.databinding.FragmentProfileBinding
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 
 
-/**
- * A simple [Fragment] subclass.
- * Use the [ProfileFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class ProfileFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,7 +32,6 @@ class ProfileFragment : Fragment() {
         val rootView = binding.root
         if (currentProfile != null) {
             binding.UserName.text = currentProfile.name
-            binding.UserInfo.text = currentProfile.info
             binding.UserPhoto.setImageResource(currentProfile.imageId)
             binding.CardsButton.setOnClickListener{
                 val action = CardsFragmentDirections.actionProfileFragmentToCardsFragment()
