@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/authFragment">
+    <fragment
+        android:id="@+id/startFragment"
+        android:name="com.example.xiinder.fragment.StartFragment"
+        android:label="@string/app_name"
+        tools:layout="sdasdasdasdas">
+        <action
+            android:id="@+id/action_startFragment_to_settingsFragment"
+            app:destination="@id/settingsFragment" />
+        <action
+            android:id="@+id/action_startFragment_to_cardsFragment"
+            app:destination="@id/cardsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.example.xiinder.fragment.ProfileFragment"
+        android:label="@string/app_name"
+        tools:layout="sdasdasdasdas" >
+        <argument
+            android:name="profile_id"
+            app:argType="integer" />
+    </fragment>
+    <action
+        android:id="@+id/action_profileFragment_to_cardsFragment"
+        app:destination="@id/cardsFragment" />
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.example.xiinder.fragment.SettingsFragment"
+        android:label="@string/app_name"
+        tools:layout="sdasdasdasdas">
+        <action
+            android:id="@+id/action_settingsFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/cardsFragment"
+        android:name="com.example.xiinder.fragment.CardsFragment"
+        android:label="@string/app_name"
+        tools:layout="sdasdasdasdas" >
+        <action
+            android:id="@+id/action_cardsFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
+        <action
+            android:id="@+id/action_cardsFragment_to_cardDetailsFragment"
+            app:destination="@id/cardDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/authFragment"
+        android:name="com.example.xiinder.fragment.AuthFragment"
+        android:label="fragment_auth"
+        tools:layout="@layout/fragment_auth" >
+        <action
+            android:id="@+id/action_authFragment_to_startFragment"
+            app:destination="@id/startFragment" />
+        <action
+            android:id="@+id/action_authFragment_to_signUpFragment"
+            app:destination="@id/signUpFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/signUpFragment"
+        android:name="com.example.xiinder.fragment.SignUpFragment"
+        android:label="fragment_sign_up"
+        tools:layout="@layout/fragment_sign_up" >
+        <action
+            android:id="@+id/action_signUpFragment_to_authFragment"
+            app:destination="@id/authFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/cardDetailsFragment"
+        android:name="com.example.xiinder.fragment.CardDetailsFragment"
+        android:label="fragment_card_details"
+        tools:layout="@layout/fragment_card_details" >
+        <argument android:name="cardId"
+            app:argType="integer" />
+    </fragment>
+
+</navigation>
