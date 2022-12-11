@@ -12,10 +12,7 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.xiinder.R
-import com.example.xiinder.CardsAdapter
-import com.example.xiinder.DataSetForCards
-import com.example.xiinder.StoreToken
+import com.example.xiinder.*
 import com.example.xiinder.databinding.FragmentCardsBinding
 
 lateinit var binding: FragmentCardsBinding
@@ -27,13 +24,20 @@ class CardsFragment : Fragment() {
     ): View {
         binding = FragmentCardsBinding.inflate(inflater)
 
-        binding.photosLinear.adapter= this.context?.let { CardsAdapter(it,DataSetForCards().loadCards(), ::goToProfileFragment) }
+        binding.photosLinear.adapter= this.context?.let { CardsAdapter(it,
+            DataForProfiles().getProfilesInfo(), DataSetForCards().loadCards(),
+            ::goToProfileFragment, ::goToCardDetailsFragment) }
 
         return binding.root
     }
 
-    fun goToProfileFragment(profileId: Int) {
+    private fun goToProfileFragment(profileId: Int) {
         val action = CardsFragmentDirections.actionCardsFragmentToProfileFragment(profileId)
+        findNavController().navigate(action)
+    }
+
+    private fun goToCardDetailsFragment(cardId: Int){
+        val action = CardsFragmentDirections.actionCardsFragmentToCardDetailsFragment(cardId)
         findNavController().navigate(action)
     }
 

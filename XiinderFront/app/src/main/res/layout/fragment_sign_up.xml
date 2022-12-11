@@ -18,23 +18,51 @@
             android:id="@+id/email"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
+            android:hint="typeYourPassword"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:hint="typeYourEmail">
+            app:layout_constraintTop_toTopOf="parent">
 
         </com.google.android.material.textfield.TextInputEditText>
 
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/telegramId"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/email"
+            android:hint="typeTelegramId">
+        </com.google.android.material.textfield.TextInputEditText>
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/name"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/telegramId"
+            android:hint="typeName">
+        </com.google.android.material.textfield.TextInputEditText>
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/password"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/email"
+            app:layout_constraintTop_toBottomOf="@id/name"
             android:hint="typePassword">
 
         </com.google.android.material.textfield.TextInputEditText>
+        <EditText
+            android:id="@+id/editTextDate2"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="date"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/password"/>
 
         <Button
             android:id="@+id/createAccount"
@@ -43,7 +71,8 @@
             android:text="create account"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            ></Button>
+            app:layout_constraintStart_toStartOf="parent" />
+
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 
 import androidx.lifecycle.lifecycleScope
@@ -65,16 +66,26 @@ class AuthFragment : Fragment() {
     private suspend fun check(email:String, password:String):Boolean
     {
         val user= User(email,password)
-        val message = viewModel.client.post("http://192.168.0.101:8888/login"){ // or your data class
+        val message = viewModel.client.post("http://192.168.0.104:8888/login"){ // or your data class
                 contentType(ContentType.Application.Json)
                 setBody(user)
             }
-        val token= message.body<Map<String,String>>()["token"]?.let { Token(it) }
-        viewModel.configAuthClient(token!!)
-        val check=viewModel.clientCheck(token)
-        coroutineScope { dataStore.saveToken(token.tokenData) }
-        viewModel.setTokenStorage(storeToken = dataStore)
-
-        return true
+        when (message.status.value)
+        {
+            200->
+            {
+                val token= message.body<Map<String,String>>()["token"]?.let { Token(it) }
+                viewModel.configAuthClient(token!!)
+                coroutineScope { dataStore.saveToken(token.tokenData) }
+                viewModel.setTokenStorage(storeToken = dataStore)
+                return true
+            }
+            401->
+            {
+                Toast.makeText(requireContext(),"Wrong username or password", Toast.LENGTH_SHORT).show();
+                return false
+            }
+            else ->{Toast.makeText(requireContext(),message.status.value.toString(), Toast.LENGTH_SHORT).show();return false}
+        }
     }
 }

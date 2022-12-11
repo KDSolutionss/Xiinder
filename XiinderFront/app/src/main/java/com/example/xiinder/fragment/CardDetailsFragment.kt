@@ -20,7 +20,7 @@ class CardDetailsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        val args: CardDetailsFragmentArgs by navArgs()
+        val args:  CardDetailsFragmentArgs by navArgs()
         val cardId = args.cardId
         val currentCard = DataSetForCards().loadCards()[cardId]
         val binding = FragmentCardDetailsBinding.inflate(layoutInflater)

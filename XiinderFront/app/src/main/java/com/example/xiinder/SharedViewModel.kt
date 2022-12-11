@@ -35,7 +35,6 @@ class SharedViewModel : ViewModel() {
                 loadTokens {
                     BearerTokens(token.tokenData,token.tokenData)
                 }
-
             }
         }}
     }
