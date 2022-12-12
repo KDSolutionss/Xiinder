@@ -1,23 +1,25 @@
 package com.example.xiinder.fragment
 
+import android.annotation.SuppressLint
 import android.os.Bundle
+import android.view.*
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.widget.Button
-import androidx.datastore.dataStore
-import androidx.datastore.dataStoreFile
-import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.xiinder.*
 import com.example.xiinder.databinding.FragmentCardsBinding
+import com.example.xiinder.MainActivity
+
+
+
+
 
 lateinit var binding: FragmentCardsBinding
 
 class CardsFragment : Fragment() {
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -29,6 +31,14 @@ class CardsFragment : Fragment() {
             ::goToProfileFragment, ::goToCardDetailsFragment) }
 
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        binding.toolbar.inflateMenu(R.menu.menu)
+
+        binding.toolbar.setOnMenuItemClickListener {
+            findNavController().navigate(R.id.action_cardsFragment_to_createCard);true;
+        }
     }
 
     private fun goToProfileFragment(profileId: Int) {

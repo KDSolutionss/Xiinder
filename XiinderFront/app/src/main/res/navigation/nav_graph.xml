@@ -48,6 +48,9 @@
         <action
             android:id="@+id/action_cardsFragment_to_cardDetailsFragment"
             app:destination="@id/cardDetailsFragment" />
+        <action
+            android:id="@+id/action_cardsFragment_to_createCard"
+            app:destination="@id/createCard" />
     </fragment>
     <fragment
         android:id="@+id/authFragment"
@@ -90,5 +93,10 @@
             android:id="@+id/action_profileDetailsFragment_to_cardsFragment"
             app:destination="@id/cardsFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/createCard"
+        android:name="com.example.xiinder.fragment.CreateCard"
+        android:label="fragment_create_card"
+        tools:layout="@layout/fragment_create_card" />
 
 </navigation>
