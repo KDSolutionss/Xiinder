@@ -66,7 +66,7 @@ class AuthFragment : Fragment() {
     private suspend fun check(email:String, password:String):Boolean
     {
         val user= User(email,password)
-        val message = viewModel.client.post("http://192.168.0.104:8888/login"){ // or your data class
+        val message = viewModel.client.post("http://192.168.0.10:8888/login"){ // or your data class
                 contentType(ContentType.Application.Json)
                 setBody(user)
             }
@@ -77,7 +77,7 @@ class AuthFragment : Fragment() {
                 val token= message.body<Map<String,String>>()["token"]?.let { Token(it) }
                 viewModel.configAuthClient(token!!)
                 coroutineScope { dataStore.saveToken(token.tokenData) }
-                viewModel.setTokenStorage(storeToken = dataStore)
+                viewModel.setTokenStorage(storeToken = dataStore, username = user.username)
                 return true
             }
             401->
