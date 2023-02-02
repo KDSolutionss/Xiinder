@@ -15,8 +15,8 @@ import com.example.xiinder.Card
 import com.example.xiinder.R
 import com.example.xiinder.SharedViewModel
 import com.example.xiinder.databinding.FragmentCreateCardBinding
+import io.ktor.client.plugins.*
 import io.ktor.client.request.*
-import io.ktor.client.utils.EmptyContent.contentType
 import io.ktor.http.*
 import kotlinx.coroutines.launch
 
@@ -53,7 +53,8 @@ class CreateCard : Fragment() {
             val contact=binding!!.editContacts.text
             val image=binding!!.imageView.drawable
             if (title.isNotEmpty()&&info.isNotEmpty()&&contact.isNotEmpty()&&image!=null)
-            {lifecycleScope.launch { apply(title.toString(),info.toString(),contact.toString(),"dataMock")}}
+            {lifecycleScope.launch { viewModel.getUsername()
+                ?.let { it1 -> apply(it1,title.toString(),info.toString(),contact.toString(),"dataMock") } }}
              }
         binding!!.uploadImage.setOnClickListener {
             val intent = Intent()
@@ -62,12 +63,13 @@ class CreateCard : Fragment() {
             startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE) }
         return fragmentBinding.root
     }
-    suspend fun apply(title:String, info:String, contacts:String, image:String)
+    suspend fun apply(uN:String,title:String, info:String, contacts:String, image:String)
     {
-        val card=Card(title,info,contacts,image)
-        val message = viewModel.client.post("http://192.168.0.104:8888/add_card"){ // or your data class
+        val card= Card(uN,title,info,contacts,image)
+        viewModel.client.post("http://192.168.0.10:8888/add_card"){ // or your data class
             contentType(ContentType.Application.Json)
             setBody(card)
+            timeout { requestTimeoutMillis=10000 }
         }
         findNavController().navigate(R.id.action_createCard_to_cardsFragment)
     }

@@ -2,6 +2,7 @@ package com.example.database
 
 import com.example.models.UserLoginInfos
 import com.example.models.Users
+import com.example.models.cards
 import io.ktor.server.config.*
 import kotlinx.coroutines.Dispatchers
 import org.jetbrains.exposed.sql.*
@@ -18,6 +19,7 @@ object DatabaseFactory {
         transaction(database) {
             SchemaUtils.create(Users)
             SchemaUtils.create(UserLoginInfos)
+            SchemaUtils.create(cards)
         }
     }
 

@@ -11,7 +11,7 @@ import kotlinx.serialization.Serializable
 
 
 @Serializable
-data class CardItem(val title:String, val info:String, val contacts:String, val image:String)
+data class CardItem(val namee:String,val title:String, val info:String, val contacts:String, val image:String)
 fun Application.configureRouting() {
     routing {
         authorizedRouting()
@@ -37,8 +37,10 @@ fun Route.cardsRouting()
 {
     get("/get_cards")
     {
-        val cards=CardService().getCards()
-        call.respond(cards)
+        val cards=CardService().getCards(call.receiveText())
+        if (cards != null) {
+            call.respond(cards.map {CardItem(it.namee,it.title,it.info,it.contact,it.image) })
+        }
     }
     post("/add_card") {
         val cardItem=call.receive<CardItem>()
