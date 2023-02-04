@@ -65,7 +65,7 @@ class SignUpFragment : Fragment() {
     ):Boolean
     {
         val usver=UserRegister(email,password,name, date,telegramId)
-        val message = viewModel.client.post("http://192.168.0.104:8888/register"){ // or your data class
+        val message = viewModel.client.post("http://192.168.0.10:8888/register"){ // or your data class
             contentType(ContentType.Application.Json)
             setBody(usver)
         }
@@ -78,7 +78,7 @@ class SignUpFragment : Fragment() {
                 val token= message.body<Map<String,String>>()["token"]?.let { Token(it) }
                 viewModel.configAuthClient(token!!)
                 coroutineScope { dataStore.saveToken(token.tokenData) }
-                viewModel.setTokenStorage(storeToken = dataStore)
+                viewModel.setTokenStorage(storeToken = dataStore,usver.username)
                 return true
             }
             409->
